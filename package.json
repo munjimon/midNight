@@ -1,0 +1,24 @@
+{
+  "name": "midnight",
+  "version": "1.0.0",
+  "description": "munjimon solo project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://munjimon@github.com/munjimon/midNight.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/munjimon/midNight/issues"
+  },
+  "homepage": "https://github.com/munjimon/midNight#readme",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.4"
+  }
+}
