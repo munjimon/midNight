@@ -8,6 +8,43 @@
     <link rel="stylesheet" type="text/css" href="/style/css/index.css" />
   </head>
   <body>
-    <h1>hello node js</h1>
+    <div id="wrap">
+      <header></header>
+      <section>
+        <div class="section__wrap">
+          <div class="section__content">
+            <h1 class="section__text">
+              midNight에 오신것을 환영합니다<br />
+              당신의 이름을 적어주세요
+            </h1>
+            <form class="section__input-box" onsubmit="changeSection(event)">
+              <input
+                class="section__input"
+                type="text"
+                placeholder="What your Name?"
+              />
+              <span class="section__focus-border"></span>
+            </form>
+          </div>
+        </div>
+      </section>
+      <footer></footer>
+    </div>
   </body>
+  <script>
+    const contentBox = document.querySelector(".section__content")
+    const sectionText = document.querySelector(".section__text")
+    const inputBox = document.querySelector(".section__input-box")
+    const userNameInput = document.querySelector(".section__input")
+    const changeSection = e => {
+      e.preventDefault()
+      sectionText.innerHTML = `안녕하세요 ${
+        userNameInput.value
+      }!<br/>아래 보이는 입력창에 메모를 적어보세요`
+      inputBox.setAttribute("onsubmit", "b(event)")
+      userNameInput.value = ""
+      userNameInput.setAttribute("placeholder", "메모를 작성해보세요")
+      userNameInput.focus()
+    }
+  </script>
 </html>
