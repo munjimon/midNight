@@ -7,18 +7,36 @@
     {
       "name": "jack",
       "id": 2
+    },
+    {
+      "name": "belzer",
+      "id": 3
     }
   ],
   "memo": [
     {
-      "userId": 0,
+      "userId": 1,
       "title": "Clive의 메모",
-      "body": "메모 내용"
+      "body": "메모 내용",
+      "id": 1
     },
     {
-      "userId": 1,
+      "userId": 2,
       "title": "Jack의 메모",
-      "body": "메모 내용"
+      "body": "메모 내용",
+      "id": 2
+    },
+    {
+      "userId": 2,
+      "title": "Jack의 메모2",
+      "body": "메모 내용2",
+      "id": 3
+    },
+    {
+      "userId": 3,
+      "title": "Belzer의 메모",
+      "body": "메모 내용",
+      "id": 4
     }
   ]
 }
