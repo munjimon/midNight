@@ -12,6 +12,15 @@ const headers = {
   "Content-Type": "application/json"
 }
 
+// if ) first visit
+// checkUser -> adder , setUser -> changeSection
+
+// if ) not first visit ( status : logout )
+// checkUser -> setUser -> loadMemo -> changeSection
+
+// if ) not first visit ( status : login )
+// localStorage check -> loadMemo -> changeSection
+
 //////////////////
 /* CHECK METHOD */
 //////////////////
@@ -24,18 +33,45 @@ window.addEventListener("DOMContentLoaded", () => {
 // Check registered users
 const checkUser = e => {
   e.preventDefault()
-  getter(`user?name=${input.value}`).then(res => {
-    if (res.length !== 0) {
-      setUser({ id: res[0].id, name: res[0].name })
-      loadMemo(res[0].id)
-    } else {
-      adder({ path: "user", name: input.value }).then(res => {
-        setUser({ id: res.id, name: res.name })
-        changeSection()
-      })
-    }
-  })
+  if (textChecker(input.value)) {
+    alert("공백은 사용 불가능합니다")
+    return false
+  } else {
+    const changedName = textChanger(input.value)
+    getter(`user?name=${changedName}`).then(res => {
+      if (res.length !== 0) {
+        setUser({ id: res[0].id, name: res[0].name })
+        loadMemo(res[0].id)
+      } else {
+        adder({ path: "user", name: changedName }).then(res => {
+          setUser({ id: res.id, name: res.name })
+          changeSection()
+        })
+      }
+    })
+  }
 }
+
+// const checkUser = e => {
+//   e.preventDefault()
+//   let checkResult = textChecker(input.value)
+//   if (checkResult === false) {
+//     alert("공백 입력은 불가능합니다. 다시 입력해주세요")
+//     return false
+//   } else {
+//     getter(`user?name=${checkResult}`).then(res => {
+//       if (res.length !== 0) {
+//         setUser({ id: res[0].id, name: res[0].name })
+//         loadMemo(res[0].id)
+//       } else {
+//         adder({ path: "user", name: checkResult }).then(res => {
+//           setUser({ id: res.id, name: res.name })
+//           changeSection()
+//         })
+//       }
+//     })
+//   }
+// }
 
 ////////////////
 /* API ACTION */
@@ -98,11 +134,21 @@ const renderLoadedMemo = memo => {
 // create memo
 const createMemo = e => {
   e.preventDefault()
-  adder({ path: "memo", title: input.value, userId: lsUserId }).then(res => {
-    memoBox.classList.toggle("memo-box--close", false)
-    makeMemoElement(res)
-  })
-  input.value = ""
+  if (textChecker(input.value)) {
+    alert("공백은 사용 불가능합니다")
+    input.value = ""
+    return false
+  } else {
+    adder({
+      path: "memo",
+      title: textChanger(input.value),
+      userId: lsUserId
+    }).then(res => {
+      memoBox.classList.toggle("memo-box--close", false)
+      makeMemoElement(res)
+    })
+    input.value = ""
+  }
 }
 
 /* memo element return */
@@ -147,10 +193,24 @@ const changeSection = memo => {
   const sectionText = document.querySelector(".text")
   const inputBox = document.querySelector(".input-box")
   if (memo !== undefined) renderLoadedMemo(memo)
-  input.value === "" ? (name = lsUserName) : (name = input.value)
+  input.value === "" ? (name = lsUserName) : (name = textChanger(input.value))
   sectionText.innerHTML = `안녕하세요 ${name}!<br/>아래 보이는 입력창에 메모를 적어보세요`
   inputBox.setAttribute("onsubmit", "createMemo(event)")
   input.value = ""
-  input.setAttribute("placeholder", "메모를 작성해보세요")
+  input.setAttribute("placeholder", "Let's Create Your Memo!")
   input.focus()
+}
+
+const textChecker = text =>
+  text.replace(/\s/g, "") === "" ||
+  text === "" ||
+  text === undefined ||
+  text === null
+    ? true
+    : false
+
+const textChanger = text => {
+  text = text.replace(/</g, "&lt;")
+  text = text.replace(/>/g, "&gt;")
+  return text
 }
