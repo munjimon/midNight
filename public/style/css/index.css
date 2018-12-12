@@ -18,6 +18,9 @@ html {
   height: 100%;
   background-color: rgba(255, 255, 255, 0.09); }
 
+header {
+  position: fixed; }
+
 header,
 footer {
   width: 100%; }
@@ -37,7 +40,7 @@ section {
     align-self: center;
     flex-direction: column;
     text-align: center;
-    margin-top: -2rem; }
+    margin-top: -5rem; }
   section .text {
     font-size: 1.3rem;
     font-weight: bold;
@@ -82,10 +85,10 @@ section {
     border-radius: 5px; }
     section .memo-box {
       width: 330px;
-      height: 250px;
+      height: 210px;
       top: 50%;
       left: 50%;
-      margin-top: 170px;
+      margin-top: 130px;
       padding: 2px 20px;
       position: fixed;
       list-style: none;
@@ -103,18 +106,40 @@ section {
     margin-top: -5px;
     margin-right: -5px; }
 
+footer {
+  position: fixed;
+  bottom: 0; }
+  footer .today {
+    display: inline-block;
+    padding: 50px 40px; }
+  footer .clock {
+    margin-top: 0.3rem;
+    font-size: 3rem;
+    font-weight: 300; }
+  footer .date {
+    font-size: 1.5rem; }
+
 @media (max-width: 767px) and (min-width: 361px) {
   section .memo-box {
     width: 330px;
-    height: 240px;
-    margin-top: 165px; } }
+    height: 190px;
+    margin-top: 120px;
+    padding: 17px 20px; } }
 
 @media (max-width: 360px) {
   section .text {
     font-size: 1.1rem; }
   section .memo-box {
     width: 80%;
-    height: 220px;
-    margin-top: 150px; }
+    height: 185px;
+    margin-top: 110px; }
   section .memo-title {
-    margin-left: 22.5px; } }
+    margin-left: 22.5px; }
+  footer .today {
+    margin: 0 auto;
+    padding: 10px 20px; }
+  footer .clock {
+    margin-top: 0.3rem;
+    font-size: 2rem; }
+  footer .date {
+    font-size: 1rem; } }

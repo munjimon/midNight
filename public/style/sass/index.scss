@@ -1,4 +1,5 @@
 $text-color: rgb(53, 190, 190);
+$memo-topMargin: 130px;
 
 * {
   margin: 0;
@@ -39,6 +40,10 @@ html {
   background-color: rgba(255, 255, 255, 0.09);
 }
 
+header {
+  position: fixed;
+}
+
 header,
 footer {
   width: 100%;
@@ -61,7 +66,7 @@ section {
     align-self: center;
     flex-direction: column;
     text-align: center;
-    margin-top: -2rem;
+    margin-top: -5rem;
   }
 
   .text {
@@ -128,10 +133,10 @@ section {
     // box-shadow: 0px 2px 3px #888;
     &-box {
       width: 330px;
-      height: 250px;
+      height: 210px;
       top: 50%;
       left: 50%;
-      margin-top: 170px;
+      margin-top: $memo-topMargin;
       padding: 2px 20px;
       position: fixed;
       list-style: none;
@@ -157,12 +162,30 @@ section {
   }
 }
 
+footer {
+  position: fixed;
+  bottom: 0;
+  .today {
+    display: inline-block;
+    padding: 50px 40px;
+  }
+  .clock {
+    margin-top: 0.3rem;
+    font-size: 3rem;
+    font-weight: 300;
+  }
+  .date {
+    font-size: 1.5rem;
+  }
+}
+
 @media (max-width: 767px) and (min-width: 361px) {
   section {
     .memo-box {
       width: 330px;
-      height: 240px;
-      margin-top: 165px;
+      height: 190px;
+      margin-top: ($memo-topMargin - 10);
+      padding: 17px 20px;
     }
   }
 }
@@ -175,12 +198,25 @@ section {
     .memo {
       &-box {
         width: 80%;
-        height: 220px;
-        margin-top: 150px;
+        height: 185px;
+        margin-top: ($memo-topMargin - 20);
       }
       &-title {
         margin-left: 22.5px;
       }
+    }
+  }
+  footer {
+    .today {
+      margin: 0 auto;
+      padding: 10px 20px;
+    }
+    .clock {
+      margin-top: 0.3rem;
+      font-size: 2rem;
+    }
+    .date {
+      font-size: 1rem;
     }
   }
 }
