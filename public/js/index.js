@@ -15,10 +15,10 @@ const headers = {
 // if ) first visit
 // checkUser -> adder , setUser -> changeSection
 
-// if ) not first visit ( status : logout )
+// if ) not first visit ( now status : logout )
 // checkUser -> setUser -> loadMemo -> changeSection
 
-// if ) not first visit ( status : login )
+// if ) not first visit ( now status : login )
 // localStorage check -> loadMemo -> changeSection
 
 //////////////////
@@ -27,14 +27,30 @@ const headers = {
 
 // if page reload , logined user check
 window.addEventListener("DOMContentLoaded", () => {
+  setInterval(renderTodayInfor, 1000)
   if (lsUserId !== null) loadMemo(lsUserId)
 })
+
+const renderTodayInfor = () => {
+  const date = new Date().toJSON()
+  const clock = new Date().toTimeString()
+  const Hours = clock.substr(0, 2)
+  const dayArr = ["일", "월", "화", "수", "목", "금", "토"]
+  document.querySelector(".date").innerText = `
+    ${date.substr(5, 2)}월 ${date.substr(8, 2)}일 ${
+    dayArr[new Date().getDay()]
+  }요일`
+  document.querySelector(".clock").innerText = `${
+    Hours >= 12 ? "오후" : "오전"
+  } ${Hours >= 12 ? `0${Hours - 12}` : Hours}${clock.substr(2, 6)}`
+}
 
 // Check registered users
 const checkUser = e => {
   e.preventDefault()
   if (textChecker(input.value)) {
     alert("공백은 사용 불가능합니다")
+    input.value = ""
     return false
   } else {
     const changedName = textChanger(input.value)
@@ -51,27 +67,6 @@ const checkUser = e => {
     })
   }
 }
-
-// const checkUser = e => {
-//   e.preventDefault()
-//   let checkResult = textChecker(input.value)
-//   if (checkResult === false) {
-//     alert("공백 입력은 불가능합니다. 다시 입력해주세요")
-//     return false
-//   } else {
-//     getter(`user?name=${checkResult}`).then(res => {
-//       if (res.length !== 0) {
-//         setUser({ id: res[0].id, name: res[0].name })
-//         loadMemo(res[0].id)
-//       } else {
-//         adder({ path: "user", name: checkResult }).then(res => {
-//           setUser({ id: res.id, name: res.name })
-//           changeSection()
-//         })
-//       }
-//     })
-//   }
-// }
 
 ////////////////
 /* API ACTION */
@@ -202,10 +197,7 @@ const changeSection = memo => {
 }
 
 const textChecker = text =>
-  text.replace(/\s/g, "") === "" ||
-  text === "" ||
-  text === undefined ||
-  text === null
+  text.replace(/\s/g, "") === "" || text === undefined || text === null
     ? true
     : false
 
