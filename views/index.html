@@ -6,6 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>midNight</title>
     <link rel="stylesheet" type="text/css" href="/style/css/index.css" />
+    <link rel="stylesheet" type="text/css" href="/style/css/default.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/img/weather-icons/weather-icons.min.css"
+    />
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
@@ -15,7 +21,33 @@
   </head>
   <body>
     <div id="wrap">
-      <header></header>
+      <header>
+        <a href="/" onclick="localStorage.clear()">
+          <div class="icon-box">
+            <i class="fas fa-undo-alt"></i> <i class="fas fa-user"></i>
+          </div>
+        </a>
+        <div class="changer" onclick="toggleChanger()">
+          <i class="far fa-image"></i>
+          <ul class="theme theme--close">
+            <li class="theme-item" onclick="changeTheme(event)">
+              <img
+                class="theme-icon default"
+                src="/img/icons/default.png"
+                alt="default"
+              />
+            </li>
+            <li class="theme-item" onclick="changeTheme(event)">
+              <img
+                class="theme-icon spring"
+                src="/img/icons/spring.png"
+                alt="spring"
+              />
+            </li>
+            <li class="theme-item"></li>
+          </ul>
+        </div>
+      </header>
       <section>
         <div class="wrap">
           <div class="content content--margin">
@@ -33,17 +65,28 @@
                 <span class="focus-border"></span>
               </form>
             </div>
-            <ul class="memo-box memo-box--close"></ul>
+            <ul class="memo memo--close"></ul>
           </div>
         </div>
       </section>
       <footer>
         <div class="today">
-          <p class="date" style="color:white"></p>
-          <p class="clock" style="color:white"></p>
+          <span class="date text"></span>
+          <p class="clock text"></p>
+        </div>
+        <div class="weather">
+          <span class="temperature text"></span> <i class="icons wi text"></i>
+          <p class="country text"></p>
         </div>
       </footer>
     </div>
   </body>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="/js/countryList.js"></script>
+  <script src="/js/apiAction.js"></script>
+  <script src="/js/memoAction.js"></script>
+  <script src="/js/theme.js"></script>
+  <script src="/js/userControl.js"></script>
+  <script src="/js/weather.js"></script>
   <script src="/js/index.js"></script>
 </html>
