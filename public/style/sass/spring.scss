@@ -1,0 +1,62 @@
+$text-color: rgb(185, 169, 255);
+$header__iconColor: rgb(255, 72, 142);
+$input__focusColor: rgb(250, 0, 96);
+
+html {
+  background-color: rgb(18, 18, 19);
+  body {
+    background: {
+      image: url("../../img/background/spring.gif");
+      repeat: no-repeat;
+      size: cover;
+      position: 15% 0;
+    }
+  }
+}
+
+header {
+  .icon-box {
+    color: $header__iconColor;
+  }
+  .changer {
+    color: $header__iconColor;
+    background-color: rgba(255, 255, 255, 0.2);
+    .theme {
+      //   &-item {
+      //   }
+      //   &-item:nth-child(1):hover .spring {
+      //     filter: invert(100%) sepia() saturate(10000%) hue-rotate(230deg);
+      //   }
+    }
+  }
+}
+
+section {
+  .text {
+    color: $text-color;
+    text-shadow: 2px 2px 5px black;
+  }
+  /* section input effect */
+  .input {
+    border-bottom: 2px solid rgba(204, 204, 204, 0.7);
+    color: $input__focusColor;
+    &::placeholder {
+      padding-left: 3px;
+      color: rgba(124, 124, 124, 1);
+    }
+    & ~ .focus-border {
+      background-color: #ffffff;
+    }
+    &:focus::placeholder {
+      color: $input__focusColor;
+    }
+  }
+}
+
+footer {
+  .text {
+    text-shadow: 2px 2px 4px black;
+    $text-color: white;
+    color: $text-color;
+  }
+}

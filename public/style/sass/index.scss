@@ -1,5 +1,18 @@
 $text-color: rgb(53, 190, 190);
-$memo-topMargin: 130px;
+$header__iconSize: 40px;
+$footer__fontSize: 1.3rem;
+$footer__padding: 30px;
+$memo__topMargin: 130px;
+$memo__itemMargin: 0;
+$transition-time: 0.4s;
+
+@mixin header-box {
+  width: 50px;
+  padding: 5px;
+  margin: 5px;
+  text-align: center;
+  display: inline-block;
+}
 
 * {
   margin: 0;
@@ -19,15 +32,6 @@ $memo-topMargin: 130px;
 // }
 
 html {
-  background-color: rgb(18, 18, 19);
-  body {
-    background: {
-      image: url("../../img/midNight_8.gif");
-      repeat: no-repeat;
-      size: cover;
-      position: 15% 0;
-    }
-  }
   @at-root &,
     body {
     height: 100%;
@@ -42,6 +46,73 @@ html {
 
 header {
   position: fixed;
+  .icon-box {
+    @include header-box();
+    height: 50px;
+    .fa-undo-alt {
+      font-size: $header__iconSize;
+    }
+    &:hover .fa-undo-alt {
+      animation: turning 1s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    }
+    .fa-user {
+      position: absolute;
+      font-size: 15px;
+      z-index: 2;
+      top: 0;
+      left: 0;
+      margin: {
+        left: 28.5px;
+        top: 22px;
+      }
+    }
+    &--close {
+      display: none;
+    }
+  }
+  .changer {
+    @include header-box();
+    float: right;
+    .fa-image {
+      font-size: $header__iconSize;
+    }
+    .theme {
+      height: 350px;
+      margin-top: 10px;
+      list-style: none;
+      overflow: hidden;
+      transition: $transition-time;
+      &--close {
+        height: 0;
+        margin: 0;
+      }
+      &-item {
+      }
+      &-item:nth-child(1):hover .default {
+        filter: invert(100%) sepia() saturate(10000%) hue-rotate(110deg);
+      }
+      &-item:nth-child(2):hover .spring {
+        filter: invert(100%) sepia() saturate(10000%) hue-rotate(230deg);
+      }
+      &-icon {
+        width: 40px;
+        height: 40px;
+        padding: 5px 0;
+      }
+    }
+    // &:hover .theme {
+    //   height: 350px;
+    // }
+  }
+}
+
+@keyframes turning {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 header,
@@ -53,7 +124,6 @@ section {
   padding: 15px;
   width: calc(100% - 30px);
   height: calc(100% - 30px);
-
   .wrap {
     width: 100%;
     height: 100%;
@@ -72,8 +142,6 @@ section {
   .text {
     font-size: 1.3rem;
     font-weight: bold;
-    color: $text-color;
-    text-shadow: 0px 4px black;
   }
 
   /* section input effect */
@@ -98,13 +166,10 @@ section {
 
   .input {
     border: 0;
-    padding: 7px 0;
-    border-bottom: 1px solid rgba(204, 204, 204, 0.2);
-    transition: 0.4s;
-    color: white;
+    padding: 7px 2px;
+    transition: $transition-time;
     &::placeholder {
-      transition: 0.4s;
-      color: rgba(255, 255, 255, 0.4);
+      padding-left: 1px;
     }
     & ~ .focus-border {
       position: absolute;
@@ -112,36 +177,30 @@ section {
       left: 0;
       width: 0;
       height: 2px;
-      background-color: #33f1ff;
-      transition: 0.4s;
+      transition: $transition-time;
     }
     &:focus ~ .focus-border {
       width: 100%;
-      transition: 0.4s;
-    }
-
-    &:focus::placeholder {
-      color: rgba(255, 255, 255, 0.8);
+      transition: $transition-time;
     }
   }
 
+  //
+
   .memo {
-    margin: 10px 0px;
-    // background-color: white;
-    // padding: 5px 10px;
-    border-radius: 5px;
-    // box-shadow: 0px 2px 3px #888;
-    &-box {
-      width: 330px;
-      height: 210px;
-      top: 50%;
-      left: 50%;
-      margin-top: $memo-topMargin;
-      padding: 2px 20px;
-      position: fixed;
-      list-style: none;
-      overflow-y: scroll;
-      transform: translate(-50%, -50%);
+    width: 330px;
+    height: 210px;
+    top: 50%;
+    left: 50%;
+    margin-top: $memo__topMargin;
+    padding: 2px 20px;
+    position: fixed;
+    list-style: none;
+    overflow-y: scroll;
+    transform: translate(-50%, -50%);
+    &-item {
+      margin: 10px $memo__itemMargin;
+      border-radius: 5px;
       &--close {
         display: none;
       }
@@ -163,60 +222,80 @@ section {
 }
 
 footer {
+  display: flex;
   position: fixed;
+  justify-content: space-between;
+  align-items: center;
   bottom: 0;
+  padding: $footer__padding 0;
   .today {
-    display: inline-block;
-    padding: 50px 40px;
+    padding-left: $footer__padding;
   }
   .clock {
-    margin-top: 0.3rem;
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: 300;
   }
   .date {
-    font-size: 1.5rem;
+    font-size: $footer__fontSize;
   }
-}
-
-@media (max-width: 767px) and (min-width: 361px) {
-  section {
-    .memo-box {
-      width: 330px;
-      height: 190px;
-      margin-top: ($memo-topMargin - 10);
-      padding: 17px 20px;
+  .weather {
+    padding-right: $footer__padding;
+    .temperature {
+      font-size: $footer__fontSize;
+    }
+    .icons {
+      font-size: $footer__fontSize;
+      position: absolute;
+      margin: {
+        top: 0.5px;
+        left: 5px;
+      }
+    }
+    .country {
+      font-size: $footer__fontSize;
+      margin-top: 2px;
     }
   }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 767px) and (min-width: 416px) {
+  section {
+    // .memo {
+    //   width: 330px;
+    //   height: 190px;
+    //   margin-top: ($memo-topMargin - 10);
+    //   padding: 17px 20px;
+    // }
+  }
+}
+
+@media (max-width: 415px) {
+  $memo__itemMargin--mobile: $memo__itemMargin + 25px;
+  $footer__padding--mobile: ($footer__padding / 2);
   section {
     .text {
       font-size: 1.1rem;
     }
-    .memo {
-      &-box {
-        width: 80%;
-        height: 185px;
-        margin-top: ($memo-topMargin - 20);
-      }
-      &-title {
-        margin-left: 22.5px;
-      }
+    .memo-item {
+      margin: 10px $memo__itemMargin--mobile;
     }
+    // .memo {
+    //   width: 80%;
+    //   height: 185px;
+    //   margin-top: ($memo-topMargin - 20);
+    // }
   }
   footer {
+    padding: $footer__padding--mobile 0;
     .today {
-      margin: 0 auto;
-      padding: 10px 20px;
+      padding-left: $footer__padding--mobile;
+      .clock {
+        margin-top: 0.3rem;
+        font-size: 2rem;
+      }
     }
-    .clock {
-      margin-top: 0.3rem;
-      font-size: 2rem;
-    }
-    .date {
-      font-size: 1rem;
+    .weather {
+      padding-right: $footer__padding--mobile;
     }
   }
 }

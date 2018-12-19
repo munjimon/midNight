@@ -1,0 +1,32 @@
+html {
+  background-color: #121213; }
+  html body {
+    background-image: url("../../img/background/default.gif");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 15% 0; }
+
+header .changer {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.2); }
+
+header .icon-box {
+  color: white; }
+
+section {
+  /* section input effect */ }
+  section .text {
+    color: #35bebe;
+    text-shadow: 0px 2px black; }
+  section .input {
+    border-bottom: 1px solid rgba(204, 204, 204, 0.2);
+    color: white; }
+    section .input::placeholder {
+      color: rgba(255, 255, 255, 0.4); }
+    section .input ~ .focus-border {
+      background-color: #33f1ff; }
+    section .input:focus::placeholder {
+      color: rgba(255, 255, 255, 0.8); }
+
+footer .text {
+  color: white; }

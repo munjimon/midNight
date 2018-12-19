@@ -2,16 +2,9 @@
   margin: 0;
   padding: 0; }
 
-html {
-  background-color: #121213; }
-  html body {
-    background-image: url("../../img/midNight_8.gif");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: 15% 0; }
-  html,
-  body {
-    height: 100%; }
+html,
+body {
+  height: 100%; }
 
 #wrap {
   width: 100%;
@@ -20,6 +13,59 @@ html {
 
 header {
   position: fixed; }
+  header .icon-box {
+    width: 50px;
+    padding: 5px;
+    margin: 5px;
+    text-align: center;
+    display: inline-block;
+    height: 50px; }
+    header .icon-box .fa-undo-alt {
+      font-size: 40px; }
+    header .icon-box:hover .fa-undo-alt {
+      animation: turning 1s cubic-bezier(0.5, 0, 0.5, 1) infinite; }
+    header .icon-box .fa-user {
+      position: absolute;
+      font-size: 15px;
+      z-index: 2;
+      top: 0;
+      left: 0;
+      margin-left: 28.5px;
+      margin-top: 22px; }
+    header .icon-box--close {
+      display: none; }
+  header .changer {
+    width: 50px;
+    padding: 5px;
+    margin: 5px;
+    text-align: center;
+    display: inline-block;
+    float: right; }
+    header .changer .fa-image {
+      font-size: 40px; }
+    header .changer .theme {
+      height: 350px;
+      margin-top: 10px;
+      list-style: none;
+      overflow: hidden;
+      transition: 0.4s; }
+      header .changer .theme--close {
+        height: 0;
+        margin: 0; }
+      header .changer .theme-item:nth-child(1):hover .default {
+        filter: invert(100%) sepia() saturate(10000%) hue-rotate(110deg); }
+      header .changer .theme-item:nth-child(2):hover .spring {
+        filter: invert(100%) sepia() saturate(10000%) hue-rotate(230deg); }
+      header .changer .theme-icon {
+        width: 40px;
+        height: 40px;
+        padding: 5px 0; }
+
+@keyframes turning {
+  0% {
+    transform: rotate(360deg); }
+  100% {
+    transform: rotate(0deg); } }
 
 header,
 footer {
@@ -43,9 +89,7 @@ section {
     margin-top: -5rem; }
   section .text {
     font-size: 1.3rem;
-    font-weight: bold;
-    color: #35bebe;
-    text-shadow: 0px 4px black; }
+    font-weight: bold; }
   section input[type="text"] {
     background: transparent;
     font: 16px/25px "Lato", Arial, sans-serif;
@@ -60,41 +104,35 @@ section {
     margin-top: 10px; }
   section .input {
     border: 0;
-    padding: 7px 0;
-    border-bottom: 1px solid rgba(204, 204, 204, 0.2);
-    transition: 0.4s;
-    color: white; }
+    padding: 7px 2px;
+    transition: 0.4s; }
     section .input::placeholder {
-      transition: 0.4s;
-      color: rgba(255, 255, 255, 0.4); }
+      padding-left: 1px; }
     section .input ~ .focus-border {
       position: absolute;
       bottom: 0;
       left: 0;
       width: 0;
       height: 2px;
-      background-color: #33f1ff;
       transition: 0.4s; }
     section .input:focus ~ .focus-border {
       width: 100%;
       transition: 0.4s; }
-    section .input:focus::placeholder {
-      color: rgba(255, 255, 255, 0.8); }
   section .memo {
-    margin: 10px 0px;
-    border-radius: 5px; }
-    section .memo-box {
-      width: 330px;
-      height: 210px;
-      top: 50%;
-      left: 50%;
-      margin-top: 130px;
-      padding: 2px 20px;
-      position: fixed;
-      list-style: none;
-      overflow-y: scroll;
-      transform: translate(-50%, -50%); }
-      section .memo-box--close {
+    width: 330px;
+    height: 210px;
+    top: 50%;
+    left: 50%;
+    margin-top: 130px;
+    padding: 2px 20px;
+    position: fixed;
+    list-style: none;
+    overflow-y: scroll;
+    transform: translate(-50%, -50%); }
+    section .memo-item {
+      margin: 10px 0;
+      border-radius: 5px; }
+      section .memo-item--close {
         display: none; }
     section .memo-title {
       display: inline-block;
@@ -107,39 +145,43 @@ section {
     margin-right: -5px; }
 
 footer {
+  display: flex;
   position: fixed;
-  bottom: 0; }
+  justify-content: space-between;
+  align-items: center;
+  bottom: 0;
+  padding: 30px 0; }
   footer .today {
-    display: inline-block;
-    padding: 50px 40px; }
+    padding-left: 30px; }
   footer .clock {
-    margin-top: 0.3rem;
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: 300; }
   footer .date {
-    font-size: 1.5rem; }
+    font-size: 1.3rem; }
+  footer .weather {
+    padding-right: 30px; }
+    footer .weather .temperature {
+      font-size: 1.3rem; }
+    footer .weather .icons {
+      font-size: 1.3rem;
+      position: absolute;
+      margin-top: 0.5px;
+      margin-left: 5px; }
+    footer .weather .country {
+      font-size: 1.3rem;
+      margin-top: 2px; }
 
-@media (max-width: 767px) and (min-width: 361px) {
-  section .memo-box {
-    width: 330px;
-    height: 190px;
-    margin-top: 120px;
-    padding: 17px 20px; } }
-
-@media (max-width: 360px) {
+@media (max-width: 415px) {
   section .text {
     font-size: 1.1rem; }
-  section .memo-box {
-    width: 80%;
-    height: 185px;
-    margin-top: 110px; }
-  section .memo-title {
-    margin-left: 22.5px; }
-  footer .today {
-    margin: 0 auto;
-    padding: 10px 20px; }
-  footer .clock {
-    margin-top: 0.3rem;
-    font-size: 2rem; }
-  footer .date {
-    font-size: 1rem; } }
+  section .memo-item {
+    margin: 10px 25px; }
+  footer {
+    padding: 15px 0; }
+    footer .today {
+      padding-left: 15px; }
+      footer .today .clock {
+        margin-top: 0.3rem;
+        font-size: 2rem; }
+    footer .weather {
+      padding-right: 15px; } }
