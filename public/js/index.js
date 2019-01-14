@@ -61,8 +61,17 @@ const blankChecker = param =>
 
 // tag => string change
 const textChanger = text => {
+  // const filterArr = [/</g, />/g, /\"/g, /\'/g]
+  // const changeSign = ["&lt;", "&gt;", "&quot;", "&#39;"]
+  // for (let i = 0; i < filterArr.length; i++) {
+  //   if (text.match(filterArr[i]) !== null) {
+  //     text = text.replace(filterArr[i], changeSign[i])
+  //   }
+  // }
   text = text.replace(/</g, "&lt;")
   text = text.replace(/>/g, "&gt;")
+  text = text.replace(/\"/g, "")
+  text = text.replace(/\'/g, "")
   return text
 }
 // const askLocation = () => {
