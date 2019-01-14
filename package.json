@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "nodemon server.js",
     "css": "node-sass --watch public/style/sass --output public/style/css",
-    "api": "json-server --watch fake-data/db.json --port 3001"
+    "api": "json-server --watch fake-data/db.json --port 3005"
   },
   "repository": {
     "type": "git",
