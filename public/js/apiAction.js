@@ -25,7 +25,7 @@ const adder = payload => {
     .post(
       `${BASE_URL + payload.path}`,
       payload.name !== undefined
-        ? { name: payload.name }
+        ? { name: payload.name, theme: payload.theme }
         : { title: payload.title, userId: payload.userId }
     )
     .then(res => res.data)
@@ -37,4 +37,13 @@ const adder = payload => {
 // delete data(memo) to server
 const deleter = id => {
   return axios.delete(`${BASE_URL}memo/${id}`).catch(err => console.error(err))
+}
+
+const themeUpdater = payload => {
+  return axios
+    .patch(`${BASE_URL}user/${payload.id}`, { theme: payload.theme })
+    .then(res => res.data)
+    .catch(err => {
+      console.error(err)
+    })
 }
