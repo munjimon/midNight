@@ -5,7 +5,7 @@ const loadMemo = userId => {
   })
 }
 
-// after last child of contentBox memo Data rendering
+// after (last child of contentBox) memo Data rendering
 const renderLoadedMemo = memo => {
   memoBox.classList.toggle("memo--close", false)
   memo.map(memo => makeMemoElement(memo))
