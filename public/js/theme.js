@@ -5,7 +5,7 @@ const changeTheme = e => {
   const newLink = document.getElementsByTagName("link").item(1)
   // Theme change(css)
   if (fileName === undefined) return false
-  localStorage.setItem("theme", e)
+  localStorage.setItem("theme", fileName)
   newLink.setAttribute("href", `/style/css/${fileName}.css`)
   // thumbnail change(icon)
   if (thumbnail.localName === "i") {
@@ -21,12 +21,33 @@ const changeTheme = e => {
       ? icons[i].classList.add("theme-item--close")
       : icons[i].classList.remove("theme-item--close")
   }
+  // if ) logined user exist , saved theme update
+  if (lsUserName !== null) {
+    themeUpdater({ id: lsUserId, theme: fileName })
+  }
 }
 
+// theme dropdown
 const toggleChanger = () =>
   document.querySelector(".theme").classList.toggle("theme--close")
 
+// thumbnail image change & css theme change
 const changeThumbnail = (elName, fileName) => {
   elName.setAttribute("class", `theme-icon ${fileName}`)
   elName.setAttribute("src", `/img/icons/${fileName}.png`)
+}
+
+// saved theme load
+const loadTheme = userTheme => {
+  let savedTheme = null
+  const newLink = document.getElementsByTagName("link").item(1)
+  userTheme === undefined
+    ? (savedTheme = localStorage.getItem("theme"))
+    : (savedTheme = userTheme)
+  if (savedTheme !== null) {
+    newLink.setAttribute("href", `/style/css/${savedTheme}.css`)
+  } else {
+    newLink.setAttribute("href", `/style/css/default.css`)
+    localStorage.setItem("theme", "default")
+  }
 }
