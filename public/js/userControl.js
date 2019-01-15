@@ -11,11 +11,14 @@ const checkUser = e => {
       if (res.length !== 0) {
         setUser({ id: res[0].id, name: res[0].name })
         loadMemo(res[0].id)
+        loadTheme(res[0].theme)
       } else {
-        adder({ path: "user", name: changedName }).then(res => {
-          setUser({ id: res.id, name: res.name })
-          changeSection()
-        })
+        adder({ path: "user", name: changedName, theme: "default" }).then(
+          res => {
+            setUser({ id: res.id, name: res.name })
+            changeSection()
+          }
+        )
       }
     })
   }
