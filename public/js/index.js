@@ -15,6 +15,8 @@ let lsUserName = localStorage.getItem("userName")
 // if ) not first visit ( now status : login )
 // localStorage check -> (memo)loadMemo -> (index)changeSection
 
+/////////////////////////////////////////////////////////////////////////////////////
+
 // if page reload , logined user check
 window.addEventListener("DOMContentLoaded", () => {
   askLocation()
@@ -22,6 +24,7 @@ window.addEventListener("DOMContentLoaded", () => {
   lsUserId !== null
     ? loadMemo(lsUserId)
     : iconBox.classList.toggle("icon-box--close", true)
+  loadTheme()
 })
 
 const renderTodayInfor = () => {
