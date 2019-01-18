@@ -39,10 +39,15 @@ const deleter = id => {
   return axios.delete(`${BASE_URL}memo/${id}`).catch(err => console.error(err))
 }
 
-const themeUpdater = payload => {
+const userInforUpdater = payload => {
+  console.log(payload)
+  const paramKey = Object.keys(payload)[1]
   return axios
-    .patch(`${BASE_URL}user/${payload.id}`, { theme: payload.theme })
-    .then(res => res.data)
+    .patch(`${BASE_URL}user/${payload.id}`, { [paramKey]: payload[paramKey] })
+    .then(res => {
+      console.log(res.data)
+      return res.data
+    })
     .catch(err => {
       console.error(err)
     })
