@@ -5,6 +5,10 @@ const iconBox = document.querySelector(".icon-box")
 // saved user information in localstorage
 let lsUserId = localStorage.getItem("userId")
 let lsUserName = localStorage.getItem("userName")
+let lsCountryCode = localStorage.getItem("language")
+let userCountryCode = ""
+//
+let fixedComment = []
 
 // if ) first visit
 // (index)checkUser -> (api)adder , (index)setUser -> (index)changeSection
@@ -21,9 +25,15 @@ let lsUserName = localStorage.getItem("userName")
 window.addEventListener("DOMContentLoaded", () => {
   askLocation()
   setInterval(renderTodayInfor, 1000)
-  lsUserId !== null
-    ? loadMemo(lsUserId)
-    : iconBox.classList.toggle("icon-box--close", true)
+  lsCountryCode !== null && lsUserId === null
+    ? changeLanguage(lsCountryCode)
+    : localStorage.setItem("language", "ko")
+  if (lsUserId !== null) {
+    loadMemo(lsUserId)
+    userChangeLanguage(localStorage.getItem("userCountryCode"))
+  } else {
+    iconBox.classList.toggle("icon-box--close", true)
+  }
   loadTheme()
 })
 
@@ -49,7 +59,7 @@ const changeSection = memo => {
   iconBox.classList.toggle("icon-box--close", false)
   if (memo !== undefined) renderLoadedMemo(memo)
   input.value === "" ? (name = lsUserName) : (name = textChanger(input.value))
-  sectionText.innerHTML = `안녕하세요 ${name}!<br/>아래 보이는 입력창에 메모를 적어보세요`
+  sectionText.innerHTML = `${fixedComment[2]} ${name}!<br/>${fixedComment[3]}`
   inputBox.setAttribute("onsubmit", "createMemo(event)")
   input.value = ""
   input.setAttribute("placeholder", "Let's Create Your Memo!")
