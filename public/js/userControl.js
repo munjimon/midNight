@@ -12,13 +12,18 @@ const checkUser = e => {
         setUser({ id: res[0].id, name: res[0].name })
         loadMemo(res[0].id)
         loadTheme(res[0].theme)
+        userChangeLanguage(res[0].language)
+        localStorage.setItem("userCountryCode", res[0].language)
       } else {
-        adder({ path: "user", name: changedName, theme: "default" }).then(
-          res => {
-            setUser({ id: res.id, name: res.name })
-            changeSection()
-          }
-        )
+        adder({
+          path: "user",
+          name: changedName,
+          theme: "default",
+          language: "ko"
+        }).then(res => {
+          setUser({ id: res.id, name: res.name })
+          changeSection()
+        })
       }
     })
   }
@@ -29,4 +34,15 @@ const setUser = infor => {
   localStorage.setItem("userName", infor.name)
   lsUserId = localStorage.getItem("userId")
   lsUserName = localStorage.getItem("userName")
+}
+
+const changeUser = () => {
+  const removeAttr = ["theme", "userId", "userName"]
+  for (let key in localStorage) {
+    for (let i = 0; i < removeAttr.length; i++)
+      if (removeAttr[i] === key) {
+        localStorage.removeItem(key)
+      }
+  }
+  console.log(localStorage)
 }
