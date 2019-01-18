@@ -59,8 +59,9 @@ const getWeatherData = (lat, lon) => {
       document.querySelector(".temperature").innerHTML = `
           ${Math.floor(resp.main.temp - 273.15)}°
           `
-      document.querySelector(".country").innerHTML = `
+      document.querySelector(".now-country").innerHTML = `
           ${convert(resp.sys.country, "KR")}
+          <i onclick='toggleModal(true)' class="fas fa-globe-asia"></i>
         `
     })
     .catch(err => {
