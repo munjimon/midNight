@@ -23,7 +23,7 @@ const changeTheme = e => {
   }
   // if ) logined user exist , saved theme update
   if (lsUserName !== null) {
-    themeUpdater({ id: lsUserId, theme: fileName })
+    userInforUpdater({ id: lsUserId, theme: fileName })
   }
 }
 
