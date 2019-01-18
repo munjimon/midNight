@@ -22,11 +22,12 @@
   <body>
     <div id="wrap">
       <header>
-        <a href="/" onclick="localStorage.clear()">
+        <a href="/" onclick="changeUser()">
           <div class="icon-box">
             <i class="fas fa-undo-alt"></i> <i class="fas fa-user"></i>
           </div>
         </a>
+        <!-- <div><button onclick="api()">hello</button></div> -->
         <div class="changer" onclick="toggleChanger()">
           <i class="far fa-image"></i>
           <ul class="theme theme--close">
@@ -44,7 +45,6 @@
                 alt="spring"
               />
             </li>
-            <li class="theme-item"></li>
           </ul>
         </div>
       </header>
@@ -52,7 +52,7 @@
         <div class="wrap">
           <div class="content content--margin">
             <div class="content-box">
-              <p class="text">
+              <p class="welcome text">
                 midNight에 오신것을 환영합니다<br />
                 당신의 이름을 적어주세요
               </p>
@@ -76,9 +76,28 @@
         </div>
         <div class="weather">
           <span class="temperature text"></span> <i class="icons wi text"></i>
-          <p class="country text"></p>
+          <p class="now-country text"></p>
         </div>
       </footer>
+    </div>
+    <div class="modal-background" onclick="toggleModal(false)">
+      <div class="modal">
+        <h4>변경할 국가를 선택하세요.</h4>
+        <ul class="country">
+          <li class="country-icon" onclick="changeLanguage('ko')">
+            <img class="country-img" src="/img/icons/korea.png" alt="korea" />
+            <p class="country-name">한국</p>
+          </li>
+          <li class="country-icon" onclick="changeLanguage('jp')">
+            <img class="country-img" src="/img/icons/japan.png" alt="japan" />
+            <p class="country-name">일본</p>
+          </li>
+          <li class="country-icon" onclick="changeLanguage('en')">
+            <img class="country-img" src="/img/icons/USA.png" alt="USA" />
+            <p class="country-name">미국</p>
+          </li>
+        </ul>
+      </div>
     </div>
   </body>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -88,5 +107,6 @@
   <script src="/js/theme.js"></script>
   <script src="/js/userControl.js"></script>
   <script src="/js/weather.js"></script>
+  <script src="/js/language.js"></script>
   <script src="/js/index.js"></script>
 </html>
